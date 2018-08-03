@@ -10,17 +10,13 @@ do
         do
                 RESULT=$(wget  -N  "$RELURL$line"  2>&1 | grep 304)
                 if [ -n "$RESULT" ]; then
-                        #echo "slower"
                         WAIT=$((WAIT+1))
                         let WAIT++;
-                        #echo "WAIT = $WAIT"
                 fi
                 echo $WAIT > /tmp/leechwait
         done
-
         WAIT=$(cat  /tmp/leechwait)
         WAIT=$((WAIT * 3))
         echo -n "."
         sleep $WAIT
-
 done
